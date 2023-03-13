@@ -9,12 +9,13 @@ const useLucid = () => {
   const [lucid, setLucid] = useState<Lucid>()
   const walletApi = useWalletApi()
   const networkId = useNetworkId(walletApi)
-
   const initializeLucid = useCallback(async () => {
+    console.log("From use lucid should be only once");
+
     if (isNil(networkId) || isNil(walletApi)) return
 
     const provider = new Blockfrost(`/api/blockfrost/${networkId}`)
-    const network = networkId === 0 ? "Testnet" : "Mainnet"
+    const network = networkId === 0 ? "Preprod" : "Mainnet"
 
     const updatedLucid = await (isNil(lucid)
       ? Lucid.new(provider, network)

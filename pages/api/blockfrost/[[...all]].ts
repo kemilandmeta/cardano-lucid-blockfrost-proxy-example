@@ -2,15 +2,15 @@ import { NextApiHandler } from 'next';
 import httpProxyMiddleware from 'next-http-proxy-middleware';
 
 const getTarget = (url?: string) => {
-  if (url?.startsWith("/api/blockfrost/0")) return "https://cardano-testnet.blockfrost.io/api/v0"
+  if (url?.startsWith("/api/blockfrost/0")) return "https://cardano-preprod.blockfrost.io/api/v0" 
   if (url?.startsWith("/api/blockfrost/1")) return "https://cardano-mainnet.blockfrost.io/api/v0"
-  return null
+  return "https://cardano-preprod.blockfrost.io/api/v0"
 }
 
 const getProjectId = (url?: string) => {
-  if (url?.startsWith("/api/blockfrost/0")) return process.env.BLOCKFROST_PROJECT_ID_TESTNET
+  if (url?.startsWith("/api/blockfrost/0")) return "preprod1QKBkJs3ZROHEYZ3244W77hXLHisUv6I"
   if (url?.startsWith("/api/blockfrost/1")) return process.env.BLOCKFROST_PROJECT_ID_MAINNET
-  return null
+  return "preprod1QKBkJs3ZROHEYZ3244W77hXLHisUv6I"
 }
 
 const blockfrostProxy: NextApiHandler = async (req, res) => {
